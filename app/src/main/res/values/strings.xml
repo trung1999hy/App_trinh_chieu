@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Video construction</string>
+    <string name="app_name" translatable="false">Slideshow</string>
     <string name="slide_show">Slide show</string>
     <string name="edit_video">Edit video</string>
     <string name="trim_video">Trim video</string>
@@ -116,6 +116,6 @@
     <string name="please_set_auto_update_time">Please set auto update time in setting</string>
     <string name="rate_us_5_stars">Rate us 5 stars</string>
     <string name="later">Later</string>
-    <string name="message_purchase_one">%s</string>
+    <string name="message_purchase_one" translatable="false">%s</string>
 
 </resources>
