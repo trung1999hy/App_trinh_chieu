@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.thn.videoconstruction">
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name="com.thn.videoconstruction.application.FEMainApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_logo_01_foreground"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_logo_01_foreground"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,LockedOrientationActivity">
+
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.my_video.AllVideosActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.slide_show.SlideShowActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity android:name="com.thn.videoconstruction.fe_ui.inapp.FEPurchaseInAppActivity" />
+
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.share_video.VideoShareActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.pick_media.MediaPickActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/PickPhotoScreenTheme" />
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.fe_process_video.VideosProcessActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.fe_select_music.MusicSelectActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.thn.videoconstruction.fe_ui.HomeActivityFE"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.thn.videoconstruction.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>
