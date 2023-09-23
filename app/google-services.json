@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "568739642391",
-    "firebase_url": "https://video-7a26e-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "video-7a26e",
-    "storage_bucket": "video-7a26e.appspot.com"
+    "project_number": "887836386775",
+    "project_id": "slideshow-2b1d6",
+    "storage_bucket": "slideshow-2b1d6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:568739642391:android:0ba340ab2d659bc8c2b052",
+        "mobilesdk_app_id": "1:887836386775:android:a5b9f267f25ec4763e9792",
         "android_client_info": {
           "package_name": "com.thn.videoconstruction"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBYEpA7BpfLnkFIMej0AprJl0hlEu6JIDY"
+          "current_key": "AIzaSyCQJBSS_18lHHqqePIppRs5asZ9x8Lt-Mc"
         }
       ],
       "services": {
