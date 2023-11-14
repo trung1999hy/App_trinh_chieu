@@ -1,2 +1,2 @@
 include ':app', ':mobile-ffmpeg1125', ':gpuv2'
-rootProject.name=' SliderShow'
+rootProject.name=' TrimVideo'

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.process_video.VideosProcessActivityFE"
     android:background="@color/white"
     android:id="@+id/mainContentInProgress">
 
@@ -20,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="32dp"
-        android:src="@drawable/ic_artwork_rendering"
+        android:src="@drawable/export_file"
         app:layout_constraintBottom_toTopOf="@id/guideLine50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
