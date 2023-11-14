@@ -21,7 +21,7 @@ class FEProgressBarRendering(context: Context, attrs: AttributeSet?) : View(cont
     }
     private val mHighlightLinePaint = Paint().apply {
         isAntiAlias = true
-        color = Color.parseColor("#FFCC80")
+        color = Color.parseColor("#D81B60")
     }
     private val mPercentTextPaint = Paint().apply {
         isAntiAlias = true
