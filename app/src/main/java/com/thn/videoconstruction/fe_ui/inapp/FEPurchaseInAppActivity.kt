@@ -1,23 +1,27 @@
 package com.thn.videoconstruction.fe_ui.inapp
 
+
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.thn.videoconstruction.R
-import com.thn.videoconstruction.application.FEMainApp
-import com.thn.videoconstruction.local.DataController
-import com.thn.videoconstruction.models.User
-import com.thn.videoconstruction.utils.Constants
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.ProductType
 import com.android.billingclient.api.BillingFlowParams.ProductDetailsParams
 import com.android.billingclient.api.QueryProductDetailsParams.Product
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.collect.ImmutableList
+import com.thn.videoconstruction.R
+import com.thn.videoconstruction.application.FEMainApp
+import com.thn.videoconstruction.local.DataController
+import com.thn.videoconstruction.models.User
+import com.thn.videoconstruction.utils.Constants
 
 
 class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClickListener {
@@ -28,6 +32,7 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
     private var onPurchaseResponse: OnPurchaseResponse? = null
     private var listData: RecyclerView? = null
     private var imgBack: ImageView? = null
+    private var progressDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_in_app_purchase)
@@ -64,6 +69,16 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
             .setListener { billingResult: BillingResult?, list: List<Purchase?>? -> }
             .build()
         establishConnection()
+        val dialogView: View = layoutInflater.inflate(R.layout.layout_progress_dialog, null)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setContentView(dialogView)
+        progressDialog?.show()
+// Perform your operation or task here
+
+
+// Perform your operation or task here
+
     }
 
     fun establishConnection() {
@@ -93,8 +108,7 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
             // Process the result
             productDetailsList!!.clear()
             handler!!.postDelayed({
-
-//                        hideProgressDialog();
+                progressDialog?.dismiss()
                 productDetailsList!!.addAll(prodDetailsList)
                 adapter!!.setData(this, productDetailsList)
                 if (prodDetailsList.size == 0) Toast.makeText(
@@ -105,6 +119,7 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
             }, 2000)
         }
     }
+
 
     //Product 1
     //Product 2
@@ -212,7 +227,8 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
 
     private fun setupResult(proId: String, quantity: Int) {
         val newGold =
-            FEMainApp.instance.getPreference()?.getValueCoin() ?: 0 + getCoinFromKey(proId) * quantity
+            FEMainApp.instance.getPreference()?.getValueCoin()
+                ?: 0 + getCoinFromKey(proId) * quantity
         FEMainApp.instance.getPreference()?.setValueCoin(newGold)
         val dataController = DataController(FEMainApp().deviceId)
         dataController.setOnListenerFirebase(object : DataController.OnListenerFirebase {
@@ -242,7 +258,6 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
 
     private fun getCoinFromKey(coinId: String): Int {
         return when (coinId) {
-
             Constants.KEY_10_COIN -> 100
             Constants.KEY_20_COIN -> 150
             Constants.KEY_50_COIN -> 300

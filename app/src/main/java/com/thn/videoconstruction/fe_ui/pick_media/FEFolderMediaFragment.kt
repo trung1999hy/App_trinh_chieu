@@ -18,6 +18,9 @@ import com.thn.videoconstruction.models.MediaModel
 import com.thn.videoconstruction.utils.Loggers
 import com.thn.videoconstruction.utils.Utils
 import kotlinx.android.synthetic.main.fragment_media_folder.*
+import kotlinx.android.synthetic.main.fragment_media_list.allMediaListView
+import kotlinx.android.synthetic.main.fragment_media_list.iv_no
+import kotlinx.android.synthetic.main.fragment_media_list.tv_no
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
@@ -67,7 +70,6 @@ class FEFolderMediaFragment : Fragment(), KodeinAware {
             mFEMediaPickViewModel.onShowFolder()
             val mediaItems = ArrayList<MediaModel>()
             for (item in it.mediaItemPaths) {
-
                 mediaItems.add(MediaModel(item))
             }
 
@@ -155,6 +157,15 @@ class FEFolderMediaFragment : Fragment(), KodeinAware {
         mFEMediaPickViewModel.FELocalStorage.mediaResponse.observe(
             viewLifecycleOwner,
             Observer {
+                if (it == null || it.size == 0) {
+                    tv_no.visibility = View.VISIBLE
+                    iv_no.visibility = View.VISIBLE
+                    mediaFolderListView.visibility = View.GONE
+                }else{
+                    tv_no.visibility = View.GONE
+                    iv_no.visibility = View.GONE
+                    mediaFolderListView.visibility = View.VISIBLE
+                }
                 mFEFolderMediaAdapter.setItemListFromData(it)
             })
 

@@ -10,6 +10,7 @@ import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.L.TAG
 import com.thn.videoconstruction.R
 import com.thn.videoconstruction.adapter.FEItemTouchCallback
 import com.thn.videoconstruction.adapter.FEPickPagerAdapter
@@ -112,7 +114,6 @@ class MediaPickActivityFE : FEBaseActivity(), KodeinAware {
             }
         } else {
             when (mTypeMedia) {
-
                 TypeMedia.PHOTO -> {
                     setScreenTitle(getString(R.string.photo))
                 }
@@ -122,21 +123,18 @@ class MediaPickActivityFE : FEBaseActivity(), KodeinAware {
         tabLayout.setupWithViewPager(viewPager)
         viewPager.offscreenPageLimit = 2
         viewPager.adapter = FEPickPagerAdapter(this, supportFragmentManager)
-
         val col = (Utils.screenWidth(this) / (96 * Utils.density(this))).roundToInt()
         mediaPickedListView.adapter = mMediaPickedAdapter
         mediaPickedListView.layoutManager = GridLayoutManager(this, col.toInt())
         addItemTouchCallback(mediaPickedListView)
         imagePickedArea.visibility = View.GONE
         mFEMediaPickViewModel.FELocalStorage.getAllMedia(mTypeMedia)
-
         for (path in mListPhotoPath) {
             mMediaPickedAdapter.addItem(MediaPickedModel(path))
             imagePickedArea.visibility = View.VISIBLE
             mediaPickedListView.scrollToPosition(mMediaPickedAdapter.itemCount - 1)
             updateNumberImageSelected()
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -156,8 +154,6 @@ class MediaPickActivityFE : FEBaseActivity(), KodeinAware {
     }
 
     override fun initActions() {
-
-
         expandViewButton.setOnClickListener {
             if (isExpanded) collapseView()
             else expandView()

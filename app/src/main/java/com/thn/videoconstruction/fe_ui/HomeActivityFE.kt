@@ -8,11 +8,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
 import android.provider.Settings
+import android.service.controls.ControlsProviderService.TAG
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thn.videoconstruction.R
 import com.thn.videoconstruction.adapter.FEMyStudioInHomeAdapterFE
 import com.thn.videoconstruction.adapter.FEThemeHomeAdapterFE
@@ -25,7 +29,10 @@ import com.thn.videoconstruction.utils.TypeMedia
 import com.thn.videoconstruction.utils.Utils
 import kotlinx.android.synthetic.main.activity_home.bgButtonSlideShow
 import kotlinx.android.synthetic.main.activity_home.icNoProject
+import kotlinx.android.synthetic.main.activity_home.iv_share_app
 import kotlinx.android.synthetic.main.activity_home.myStudioListView
+import kotlinx.android.synthetic.main.activity_home.nestedScrollView
+import kotlinx.android.synthetic.main.activity_home.tvVersion
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -50,11 +57,9 @@ class HomeActivityFE : FEBaseActivity() {
 
     private var onSplashComplete = false
     override fun initViews() {
-
+        setUpTextViewVerSion()
         comebackStatus = getString(R.string.do_you_want_to_leave)
         hideHeader()
-
-
         myStudioListView.apply {
             adapter = mMyStudioAdapter
             val layoutManager =
@@ -101,14 +106,33 @@ class HomeActivityFE : FEBaseActivity() {
         if (!checkStoragePermission()) {
             requestStoragePermission()
         }
-
+        iv_share_app.setOnClickListener { shareApp() }
     }
 
+    private fun shareApp() {
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        val appName = packageInfo.applicationInfo.labelRes
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "\uD83D\uDD90 Create professional-looking slideshows and videos without any design experience using ${getString(appName)}. \n" +
+                        "https://play.google.com/store/apps/details?id=com.thn.videoconstruction&hl=vi&gl=US")
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    private fun setUpTextViewVerSion() {
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        val appName = packageInfo.applicationInfo.labelRes
+        val versionCode = packageInfo.versionCode
+        tvVersion.text = "App Name: ${getString(appName)}\nVersion Code: $versionCode"
+    }
 
     private fun onInit() {
         onSplashComplete = true
         needShowDialog = true
-
         if (checkStoragePermission()) {
 
             Thread {
@@ -159,6 +183,7 @@ class HomeActivityFE : FEBaseActivity() {
             override fun onFinish() {
                 pickMediaAvailable = true
             }
+
             override fun onTick(millisUntilFinished: Long) {
 
             }
@@ -369,7 +394,7 @@ class HomeActivityFE : FEBaseActivity() {
                                 item.absolutePath,
                                 item.lastModified(),
                                 duration
-                                 )
+                            )
                         )
                     } catch (e: Exception) {
                         item.delete()
@@ -386,21 +411,16 @@ class HomeActivityFE : FEBaseActivity() {
                     icNoProject.visibility = View.VISIBLE
                 } else {
                     icNoProject.visibility = View.GONE
-
                 }
             }
 
         }.start()
-
-
     }
 
     private var mOnPause = false
     override fun onPause() {
         super.onPause()
         mOnPause = true
-
-
     }
 
     override fun onBackPressed() {

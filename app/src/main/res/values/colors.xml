@@ -36,5 +36,8 @@
     <color name="purpleA01">#AC97FF</color>
 
     <color name="pinkA01">#FF4E8A</color>
+    <color name="color_gray_01">#444655</color>
+    <color name="grey01">#444655</color>
+    <color name="transparent">#000000</color>
 
 </resources>

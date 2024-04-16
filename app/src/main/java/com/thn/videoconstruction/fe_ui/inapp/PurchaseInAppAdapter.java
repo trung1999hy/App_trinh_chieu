@@ -61,12 +61,7 @@ public class PurchaseInAppAdapter extends RecyclerView.Adapter<PurchaseInAppAdap
             if (productDetails == null) return;
             String price = productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice();
             tvSubName.setText(setTitleValue(productDetails.getProductId(), price));
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickListener.onClickItem(productDetails);
-                }
-            });
+            item.setOnClickListener(view -> onClickListener.onClickItem(productDetails));
         }
     }
 
@@ -81,24 +76,24 @@ public class PurchaseInAppAdapter extends RecyclerView.Adapter<PurchaseInAppAdap
     private String setTitleValue(String productId, String price) {
         switch (productId) {
             case Constants.KEY_10_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/50 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/50 gold");
             case Constants.KEY_20_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/150 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/150 gold");
             case Constants.KEY_50_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/300 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/300 gold");
             case Constants.KEY_100_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/500 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/500 gold");
             case Constants.KEY_150_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/700 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/700 gold");
             case Constants.KEY_200_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/999 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/999 gold");
             case Constants.KEY_5_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/25 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/25 gold");
             case Constants.KEY_60_COIN:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/600 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), price + "/600 gold");
 
             default:
-                return String.format(context.getResources().getString(R.string.message_purchase_one), "/0 coin");
+                return String.format(context.getResources().getString(R.string.message_purchase_one), "/0 gold");
         }
     }
 }

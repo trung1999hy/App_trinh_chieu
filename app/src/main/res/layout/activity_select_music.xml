@@ -4,16 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.select_music.MusicSelectActivityFE"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui.select_music.MusicSelectActivityFE">
+
+    <ImageView
+        android:id="@+id/iv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_block"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:text="@string/txt_no_music"
+        android:textColor="@color/grey01"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_no"
+        app:layout_constraintStart_toStartOf="@id/iv_no"
+        app:layout_constraintTop_toBottomOf="@id/iv_no" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/musicListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_music_list"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_music_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

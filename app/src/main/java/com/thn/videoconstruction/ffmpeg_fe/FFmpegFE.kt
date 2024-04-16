@@ -36,8 +36,6 @@ class FFmpegFE(val cmd:Array<String>) {
             }
             val status = FFmpeg.execute(cmd)
 
-
-
             onComplete.invoke()
         }.start()
     }

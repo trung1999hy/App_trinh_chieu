@@ -250,8 +250,7 @@ abstract class FEBaseActivity : AppCompatActivity() {
     }
 
     protected fun showProgressDialog() {
-        if (!mProgressIsShowing) {
-            LayoutInflater.from(this).inflate(R.layout.layout_progress_dialog, baseRootView, true)
+        if (!mProgressIsShowing) { LayoutInflater.from(this).inflate(R.layout.layout_progress_dialog, baseRootView, true)
             mProgressIsShowing = true
         }
     }

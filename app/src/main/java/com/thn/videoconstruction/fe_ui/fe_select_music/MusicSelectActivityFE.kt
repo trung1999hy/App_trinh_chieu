@@ -3,7 +3,9 @@ package com.thn.videoconstruction.fe_ui.fe_select_music
 import android.app.Activity
 import android.content.Intent
 import android.media.MediaPlayer
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -120,6 +122,7 @@ class MusicSelectActivityFE : FEBaseActivity(), KodeinAware {
     private fun listen() {
         mFEMusicSelectViewModel.FELocalStorage.audioDataResponse.observe(this, Observer {
             mFEMusicListAdapter.setAudioDataList(it)
+            if (it == null || it.size == 0) visibility(View.VISIBLE) else visibility(View.GONE)
             mAllMusicList.addAll(it)
             mCurrentMusic?.let {musicReturnData ->
                 val index = mFEMusicListAdapter.restoreBeforeMusic(musicReturnData)
@@ -127,10 +130,13 @@ class MusicSelectActivityFE : FEBaseActivity(), KodeinAware {
                     musicListView.scrollToPosition(index)
                     mFEMusicPlayers.changeMusic(musicReturnData.audioFilePath, musicReturnData.startOffset, musicReturnData.length)
                 }
-
             }
-
         })
+    }
+
+    private fun visibility(visibility: Int) {
+        tv_no.visibility = visibility
+        iv_no.visibility = visibility
     }
 
     override fun initActions() {

@@ -9,19 +9,21 @@
 
     <ImageView
         android:id="@+id/imvBack"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:padding="12dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:padding="14dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@drawable/ic_back_vector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Store"
+        android:text="@string/txt_store"
         android:textColor="@color/black"
         android:textSize="21sp"
         android:textStyle="bold"

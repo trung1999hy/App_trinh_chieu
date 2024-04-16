@@ -33,7 +33,6 @@ class FEMyStudioInHomeAdapterFE : FEBaseAdapter<MyStudioModel>() {
         ).into(view.imageThumb)
 
         if (item.filePath.lowercase(Locale.getDefault()).contains(".mp4")) {
-            view.grayBg.visibility = View.VISIBLE
             try {
                 val duration = Utils.getVideoDuration(item.filePath)
                 view.durationLabel.text = Utils.convertSecToTimeString(duration / 1000)
@@ -49,7 +48,6 @@ class FEMyStudioInHomeAdapterFE : FEBaseAdapter<MyStudioModel>() {
 
 
         } else {
-            view.grayBg.visibility = View.GONE
             view.durationLabel.visibility = View.GONE
         }
         view.setOnClickListener {

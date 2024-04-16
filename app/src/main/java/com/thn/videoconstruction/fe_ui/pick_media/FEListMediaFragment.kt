@@ -2,6 +2,8 @@ package com.thn.videoconstruction.fe_ui.pick_media
 
 
 import android.os.Bundle
+import android.service.controls.ControlsProviderService.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -109,6 +111,16 @@ class FEListMediaFragment : Fragment(), KodeinAware {
             viewLifecycleOwner,
             Observer {
                 Loggers.e("media size = ${it.size}")
+                if (it.size == 0  || it == null){
+                    tv_no.visibility =View.VISIBLE
+                    iv_no.visibility =View.VISIBLE
+                    allMediaListView.visibility = View.GONE
+
+                }else{
+                    tv_no.visibility =View.GONE
+                    iv_no.visibility =View.GONE
+                    allMediaListView.visibility = View.VISIBLE
+                }
                 if (it.size == 0) {
                     mMediaList.clear()
                     mFEListMediaAdapter.clear()
@@ -120,20 +132,20 @@ class FEListMediaFragment : Fragment(), KodeinAware {
                         val mediaModel = MediaModel(item)
                         mediaList.add(mediaModel)
                     }
-
                 }
 
                 mMediaList.clear()
                 mMediaList.addAll(mediaList)
                 mMediaList.sort()
                 mFEListMediaAdapter.setItemList(mMediaList)
+
                 mFEListMediaAdapter.updateCount(extraPathList)
                 mFEMediaPickViewModel.updateCount(extraPathList)
+
                 extraPathList.clear()
             })
 
         mFEMediaPickViewModel.itemJustDeleted.observe(viewLifecycleOwner, Observer {
-
             onDeleteItem(it)
         })
         mFEMediaPickViewModel.itemJustPicked.observe(viewLifecycleOwner, Observer {

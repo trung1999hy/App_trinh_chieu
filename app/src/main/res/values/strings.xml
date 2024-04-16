@@ -117,5 +117,10 @@
     <string name="rate_us_5_stars">Rate us 5 stars</string>
     <string name="later">Later</string>
     <string name="message_purchase_one" translatable="false">%s</string>
+    <string name="txt_content" translatable="false">Bộ sưu tập trống</string>
+    <string name="txt_version" translatable="false">SliderShow :version 1.0</string>
+    <string name="txt_store" translatable="false">Store</string>
+    <string name="txt_no_data" translatable="false">Bộ Sưu Tập Trống</string>
+    <string name="txt_no_music">No music found on the device. Try adding music to your device.</string>
 
 </resources>
