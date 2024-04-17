@@ -39,5 +39,6 @@
     <color name="color_gray_01">#444655</color>
     <color name="grey01">#444655</color>
     <color name="transparent">#000000</color>
+    <color name="colordialog">#00FFFFFF</color>
 
 </resources>

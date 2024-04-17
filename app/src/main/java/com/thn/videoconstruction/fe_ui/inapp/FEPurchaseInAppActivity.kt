@@ -2,7 +2,9 @@ package com.thn.videoconstruction.fe_ui.inapp
 
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.app.ProgressDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.billingclient.api.*
@@ -32,14 +35,23 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
     private var onPurchaseResponse: OnPurchaseResponse? = null
     private var listData: RecyclerView? = null
     private var imgBack: ImageView? = null
-    private var progressDialog: ProgressDialog? = null
+    private var alertDialog: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_in_app_purchase)
         initViews()
+        showDialogLoading()
         imgBack!!.setOnClickListener { onBackPressed() }
     }
-
+    @SuppressLint("ResourceAsColor")
+    private fun showDialogLoading() {
+        val builder = Dialog(this)
+        builder.setContentView(R.layout.layout_progress_dialog)
+        builder.window?.setBackgroundDrawable(ColorDrawable(android.R.color.transparent))
+        alertDialog = builder
+        alertDialog?.setCancelable(false)
+        alertDialog?.show()
+    }
     override fun onResume() {
         super.onResume()
         billingClient!!.queryPurchasesAsync(
@@ -69,11 +81,7 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
             .setListener { billingResult: BillingResult?, list: List<Purchase?>? -> }
             .build()
         establishConnection()
-        val dialogView: View = layoutInflater.inflate(R.layout.layout_progress_dialog, null)
 
-        progressDialog = ProgressDialog(this)
-        progressDialog?.setContentView(dialogView)
-        progressDialog?.show()
 // Perform your operation or task here
 
 
@@ -108,7 +116,7 @@ class FEPurchaseInAppActivity : AppCompatActivity(), PurchaseInAppAdapter.OnClic
             // Process the result
             productDetailsList!!.clear()
             handler!!.postDelayed({
-                progressDialog?.dismiss()
+                alertDialog?.dismiss()
                 productDetailsList!!.addAll(prodDetailsList)
                 adapter!!.setData(this, productDetailsList)
                 if (prodDetailsList.size == 0) Toast.makeText(
